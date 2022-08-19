@@ -23,29 +23,26 @@ const before = performance.now();
 const navbarList = document.getElementById("navbar__list");
 const sec = document.querySelectorAll("section");
 const secNum = sec.length;
-/*sen of vars*/
+/*end of vars*/
 
 /*function to trigger the section you want*/
 function nav() {
-    for (let i = 1; i < secNum+1; i++) {
+    for (let i = 1; i < secNum + 1; i++) {
+        const fragment = document.createDocumentFragment();
         let liNew = document.createElement("li");
         liNew.innerText = `Section ${i}`;
         //liNew.setAttribute("href", `#section${i}`);
         liNew.setAttribute("id", `sectionClass${i}`);
         const sect = document.getElementById(`section${i}`);
-        liNew.addEventListener("click", goto = () =>  sect.scrollIntoView({
-            behavior: 'smooth'}));
+        liNew.addEventListener("click", goto = () =>  sect.scrollIntoView({ behavior: 'smooth'}));
         //liNew.addEventListener("click", goto = () => window.location.href = `#section${i}`);
-        navbarList.appendChild(liNew);
-        
-     
+        fragment.appendChild(liNew);
+        navbarList.appendChild(fragment);
     }
 }
 /* end of triggred func*/
 
-
 const middile = performance.now();
-
 
 /*function to make the active class*/
 function activeClass() {
@@ -56,44 +53,30 @@ function activeClass() {
         if (rect.top <= 470 && rect.top >= -200) {
             activeLiSec.classList.add("activesec")
             rectNw.classList.add("your-active-class");
-        } else {
+        }
+        else {
             activeLiSec.classList.remove("activesec")
             rectNw.classList.remove("your-active-class");
-        }
-        
+        }   
     }
-    
-    
 }
 /*end of active class func.*/
 
-
-
 /* nav hide */
-var isScrolling;
-window.addEventListener('scroll', function () {
-
-    
+let isScrolling;
+window.addEventListener('scroll',  () => {
     window.clearTimeout(isScrolling);
     document.getElementById("page__header").style.display = "block";
-  
     isScrolling = setTimeout(function () {
-
         document.getElementById("page__header").style.display = "none";
-
     }, 5000);
-
 }, false);
 
 /*    nav hide end    */
-
-
 
 /* call funcs */
 nav();
 activeClass();
 /* */
-
-
 const after = performance.now();
 
